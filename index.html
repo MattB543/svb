@@ -1,0 +1,145 @@
+<html>
+  <head>
+    <title>SVB: Rate Expectations</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      // Define some global variables for the game state
+      var interestRate = 0.5; // The interest rate for SVB's loans
+      var yieldRate = 0.3; // The yield rate for SVB's bonds
+      var cashInflow = 1000; // The amount of money coming in from loans and investments
+      var expenses = 800; // The amount of money going out for salaries and interest payments
+      var deposits = 5000; // The amount of money in SVB's accounts
+      var vcHappiness = 80; // The satisfaction level of the venture capitalists who fund SVB
+      var founderHappiness = 70; // The satisfaction level of the tech start-ups who borrow from SVB
+
+      // Define some functions to update the game state based on the user's decisions
+      function acceptJob() {
+        alert("You accepted the job as an SVB executive. Congratulations!");
+        vcHappiness += 10;
+        founderHappiness -= 10;
+        updateDashboard();
+        showDecision(2);
+      }
+
+      function declineJob() {
+        alert("You declined the job as an SVB executive. Maybe next time.");
+        vcHappiness -= 10;
+        founderHappiness += 10;
+        updateDashboard();
+        showDecision(2);
+      }
+
+      function setInterestRate(rate) {
+        alert("You set the interest rate for SVB's loans to " + rate + "%.");
+        interestRate = rate / 100;
+        cashInflow += (rate * deposits) / 100;
+        expenses += (rate * deposits) / 100;
+        if (rate < yieldRate) {
+          vcHappiness -= (yieldRate - rate) * 10;
+          founderHappiness += (yieldRate - rate) * 10;
+        } else if (rate > yieldRate) {
+          vcHappiness += (rate - yieldRate) * 10;
+          founderHappiness -= (rate - yieldRate) * 10;
+        }
+      }
+
+      function investInStartup(option) {
+        var startup;
+        var years;
+        var successChance;
+        if (option == 1) {
+          startup = "a crypto start-up that is creating tokens for cat memes";
+          years = 5;
+          successChance = 30;
+        } else if (option == 2) {
+          startup =
+            "a biotech company that needs 8 years of runway and only a 10% chance of getting FDA approval";
+          years = 8;
+          successChance = 10;
+        } else {
+          startup =
+            "a social media app that lets users rate each other’s outfits";
+          years = 3;
+          successChance = 50;
+        }
+        var investment = Math.floor(Math.random() * 1000) + 1000;
+        var success = Math.random() < successChance / 100;
+        if (success) {
+          alert(
+            "Your investment of $" +
+              investment +
+              " in " +
+              startup +
+              " paid off after " +
+              years +
+              " years! Congratulations!"
+          );
+          cashInflow += investment * 3;
+          vcHappiness += 10;
+          founderHappiness += 10;
+        } else {
+          alert(
+            "Your investment of $" +
+              investment +
+              " in " +
+              startup +
+              " did not pay off after " +
+              years +
+              " years. Better luck next time!"
+          );
+          vcHappiness -= 10;
+          founderHappiness -= 10;
+        }
+        updateDashboard();
+        showDecision(4);
+      }
+
+      // Define the function to update the dashboard with the latest game state
+      function updateDashboard() {
+        document.getElementById("interest-rate").innerHTML =
+          (interestRate * 100).toFixed(2) + "%";
+        document.getElementById("yield-rate").innerHTML =
+          (yieldRate * 100).toFixed(2) + "%";
+        document.getElementById("cash-inflow").innerHTML =
+          "$" + cashInflow.toLocaleString();
+        document.getElementById("expenses").innerHTML =
+          "$" + expenses.toLocaleString();
+        document.getElementById("deposits").innerHTML =
+          "$" + deposits.toLocaleString();
+        document.getElementById("vc-happiness").innerHTML =
+          vcHappiness + "/100";
+        document.getElementById("founder-happiness").innerHTML =
+          founderHappiness + "/100";
+      }
+
+      // Define the function to show a decision to the user
+      function showDecision(decision) {
+        document.getElementById("decision-" + decision).style.display = "block";
+      }
+    </script>
+  </head>
+  <body onload="updateDashboard(); showDecision(1);">
+    <h1>SVB: Rate Expectations</h1>
+    <div id="dashboard">
+      <div>Interest Rate: <span id="interest-rate"></span></div>
+      <div>Yield Rate: <span id="yield-rate"></span></div>
+      <div>Cash Inflow: <span id="cash-inflow"></span></div>
+      <div>Expenses: <span id="expenses"></span></div>
+      <div>Deposits: <span id="deposits"></span></div>
+      <div>VC Happiness: <span id="vc-happiness"></span></div>
+      <div>Founder Happiness: <span id="founder-happiness"></span></div>
+    </div>
+    <div id="decisions">
+      <div id="decision-1">
+        <h2>
+          Decision 1: You are offered a job as an SVB executive. Do you accept
+          it or decline it?
+        </h2>
+        <button onclick="acceptJob()">Accept</button>
+        <button onclick="declineJob()">Decline</button>
+      </div>
+    </div>
+  </body>
+</html>
