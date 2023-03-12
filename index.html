@@ -4,141 +4,191 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
     <script>
-      // Define some global variables for the game state
-      var interestRate = 0.5; // The interest rate for SVB's loans
-      var yieldRate = 0.3; // The yield rate for SVB's bonds
-      var cashInflow = 1000; // The amount of money coming in from loans and investments
-      var expenses = 800; // The amount of money going out for salaries and interest payments
-      var deposits = 5000; // The amount of money in SVB's accounts
-      var vcHappiness = 80; // The satisfaction level of the venture capitalists who fund SVB
-      var founderHappiness = 70; // The satisfaction level of the tech start-ups who borrow from SVB
-
-      // Define some functions to update the game state based on the user's decisions
-      function acceptJob() {
-        alert("You accepted the job as an SVB executive. Congratulations!");
-        vcHappiness += 10;
-        founderHappiness -= 10;
-        updateDashboard();
-        showDecision(2);
+      // create showNextSlide function
+      function showNextSlide(slideNumber) {
+        showDecision(slideNumber);
       }
 
-      function declineJob() {
-        alert("You declined the job as an SVB executive. Maybe next time.");
-        vcHappiness -= 10;
-        founderHappiness += 10;
-        updateDashboard();
-        showDecision(2);
-      }
-
-      function setInterestRate(rate) {
-        alert("You set the interest rate for SVB's loans to " + rate + "%.");
-        interestRate = rate / 100;
-        cashInflow += (rate * deposits) / 100;
-        expenses += (rate * deposits) / 100;
-        if (rate < yieldRate) {
-          vcHappiness -= (yieldRate - rate) * 10;
-          founderHappiness += (yieldRate - rate) * 10;
-        } else if (rate > yieldRate) {
-          vcHappiness += (rate - yieldRate) * 10;
-          founderHappiness -= (rate - yieldRate) * 10;
+      // create showDecision function
+      function showDecision(decisionNumber) {
+        // hide all decisions
+        var decisions = document.getElementsByClassName("decision");
+        for (var i = 0; i < decisions.length; i++) {
+          decisions[i].style.display = "none";
         }
-      }
-
-      function investInStartup(option) {
-        var startup;
-        var years;
-        var successChance;
-        if (option == 1) {
-          startup = "a crypto start-up that is creating tokens for cat memes";
-          years = 5;
-          successChance = 30;
-        } else if (option == 2) {
-          startup =
-            "a biotech company that needs 8 years of runway and only a 10% chance of getting FDA approval";
-          years = 8;
-          successChance = 10;
-        } else {
-          startup =
-            "a social media app that lets users rate each other’s outfits";
-          years = 3;
-          successChance = 50;
-        }
-        var investment = Math.floor(Math.random() * 1000) + 1000;
-        var success = Math.random() < successChance / 100;
-        if (success) {
-          alert(
-            "Your investment of $" +
-              investment +
-              " in " +
-              startup +
-              " paid off after " +
-              years +
-              " years! Congratulations!"
-          );
-          cashInflow += investment * 3;
-          vcHappiness += 10;
-          founderHappiness += 10;
-        } else {
-          alert(
-            "Your investment of $" +
-              investment +
-              " in " +
-              startup +
-              " did not pay off after " +
-              years +
-              " years. Better luck next time!"
-          );
-          vcHappiness -= 10;
-          founderHappiness -= 10;
-        }
-        updateDashboard();
-        showDecision(4);
-      }
-
-      // Define the function to update the dashboard with the latest game state
-      function updateDashboard() {
-        document.getElementById("interest-rate").innerHTML =
-          (interestRate * 100).toFixed(2) + "%";
-        document.getElementById("yield-rate").innerHTML =
-          (yieldRate * 100).toFixed(2) + "%";
-        document.getElementById("cash-inflow").innerHTML =
-          "$" + cashInflow.toLocaleString();
-        document.getElementById("expenses").innerHTML =
-          "$" + expenses.toLocaleString();
-        document.getElementById("deposits").innerHTML =
-          "$" + deposits.toLocaleString();
-        document.getElementById("vc-happiness").innerHTML =
-          vcHappiness + "/100";
-        document.getElementById("founder-happiness").innerHTML =
-          founderHappiness + "/100";
-      }
-
-      // Define the function to show a decision to the user
-      function showDecision(decision) {
-        document.getElementById("decision-" + decision).style.display = "block";
+        // show the decision with the given number
+        document.getElementById("decision-" + decisionNumber).style.display =
+          "flex";
       }
     </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body onload="updateDashboard(); showDecision(1);">
-    <h1>SVB: Rate Expectations</h1>
-    <div id="dashboard">
-      <div>Interest Rate: <span id="interest-rate"></span></div>
-      <div>Yield Rate: <span id="yield-rate"></span></div>
-      <div>Cash Inflow: <span id="cash-inflow"></span></div>
-      <div>Expenses: <span id="expenses"></span></div>
-      <div>Deposits: <span id="deposits"></span></div>
-      <div>VC Happiness: <span id="vc-happiness"></span></div>
-      <div>Founder Happiness: <span id="founder-happiness"></span></div>
-    </div>
+  <body
+    onload="updateDashboard(); showDecision(1);"
+    class="max-w-4xl m-auto p-10 text-center"
+  >
+    <h1 class="text-4xl font-semibold mb-10">
+      Silicon Valley Bank<br />Rate Expectations
+    </h1>
     <div id="decisions">
-      <div id="decision-1">
-        <h2>
-          Decision 1: You are offered a job as an SVB executive. Do you accept
-          it or decline it?
+      <div class="decision" id="decision-1" style="display: flex">
+        <h2 class="prompt">
+          You did it! You've landed the job as an SVB executive. Do you:
         </h2>
-        <button onclick="acceptJob()">Accept</button>
-        <button onclick="declineJob()">Decline</button>
+        <button class="decision_button" onclick="showNextSlide(2);">
+          Accept it and hope for a golden parachute
+        </button>
+        <button class="decision_button" onclick="showNextSlide(2);">
+          Decline it and join a crypto startup instead
+        </button>
+        <button class="decision_button" onclick="showNextSlide(2);">
+          Accept it but secretly work for Thiel
+        </button>
+      </div>
+
+      <div class="decision" id="decision-2" style="display: none">
+        <h2 class="prompt">
+          Time to impress the VCs! Which of these strategies do you choose:
+        </h2>
+        <button class="decision_button" onclick="showNextSlide(3);">
+          Give them tickets to the Warriors game and hope they don't notice
+          Steph Curry is missing
+        </button>
+        <button class="decision_button" onclick="showNextSlide(3);">
+          Give them tickets to Burning Man and hope they don't get lost in the
+          desert
+        </button>
+        <button class="decision_button" onclick="showNextSlide(3);">
+          Invite them to your house for dinner and serve them Beyond Meat
+        </button>
+      </div>
+
+      <div class="decision" id="decision-3" style="display: none">
+        <h2 class="prompt">
+          You're in charge of deciding which startups get loans. What's your
+          move?
+        </h2>
+        <button class="decision_button" onclick="showNextSlide(4);">
+          Give loans to the crypto startup and get paid in NFTs
+        </button>
+        <button class="decision_button" onclick="showNextSlide(4);">
+          Give loans to the biotech company and get access to their experimental
+          drugs
+        </button>
+        <button class="decision_button" onclick="showNextSlide(4);">
+          Give loans to the social media app and get featured as an influencer
+        </button>
+      </div>
+
+      <div class="decision" id="decision-4" style="display: none">
+        <h2 class="prompt">
+          It's time to create your portfolio. What's your strategy?
+        </h2>
+        <button class="decision_button" onclick="showNextSlide(5);">
+          Buy long-term bonds and hope inflation doesn't kill you
+        </button>
+        <button class="decision_button" onclick="showNextSlide(5);">
+          Buy short-term bonds and hope interest rates don't spike
+        </button>
+        <button class="decision_button" onclick="showNextSlide(5);">
+          Buy no bonds and invest in Dogecoin instead
+        </button>
+      </div>
+
+      <div class="decision" id="decision-5" style="display: none">
+        <h2 class="prompt">
+          How will you respond to rising inflation and interest rates?
+        </h2>
+        <button class="decision_button" onclick="showNextSlide(6);">
+          Adjust your strategy by raising fees on your customers
+        </button>
+        <button class="decision_button" onclick="showNextSlide(6);">
+          Ignore the news by deleting Twitter from your phone
+        </button>
+        <button class="decision_button" onclick="showNextSlide(6);">
+          Blame your strategy on someone else by firing your CFO
+        </button>
+      </div>
+
+      <div class="decision" id="decision-6" style="display: none">
+        <h2 class="prompt">
+          Rumors of financial troubles are circulating. What do you do?
+        </h2>
+        <button class="decision_button" onclick="showNextSlide(7);">
+          Deny them by issuing a press release full of buzzwords
+        </button>
+        <button class="decision_button" onclick="showNextSlide(7);">
+          Admit them by going on CNBC and crying
+        </button>
+        <button class="decision_button" onclick="showNextSlide(7);">
+          Sell the news to Thiel by becoming his mole inside SVB
+        </button>
+      </div>
+
+      <div class="decision" id="decision-7" style="display: none">
+        <h2 class="prompt">
+          The bank is in trouble. Will you seek a buyer or try to save it
+          yourself?
+        </h2>
+        <button class="decision_button" onclick="showNextSlide(8);">
+          Seek a buyer for SVB by pitching it as an opportunity for growth
+        </button>
+        <button class="decision_button" onclick="showNextSlide(8);">
+          Try to save SVB yourself by applying for a PPP loan
+        </button>
+        <button class="decision_button" onclick="showNextSlide(8);">
+          Do neither and wait for Elon Musk's tweet
+        </button>
+      </div>
+
+      <div class="decision" id="decision-8" style="display: none">
+        <h2 class="prompt">The regulators are coming. What's your approach?</h2>
+        <button class="decision_button" onclick="showNextSlide(9);">
+          Cooperate with regulators by giving them access to all your records
+        </button>
+        <button class="decision_button" onclick="showNextSlide(9);">
+          Resist regulators by hiding evidence in offshore accounts
+        </button>
+        <button class="decision_button" onclick="showNextSlide(9);">
+          Seduce regulators by inviting them over for Netflix and chill
+        </button>
+      </div>
+
+      <div class="decision" id="decision-9" style="display: none">
+        <h2 class="prompt">
+          How do you plan to protect your personal assets and reputation?
+        </h2>
+        <button class="decision_button" onclick="showNextSlide(10);">
+          Cash out by selling all your shares before they tank
+        </button>
+        <button class="decision_button" onclick="showNextSlide(10);">
+          Stay loyal by buying more shares at bargain prices
+        </button>
+        <button class="decision_button" onclick="showNextSlide(10);">
+          Flee the country by booking a flight on SpaceX
+        </button>
+      </div>
+      <div class="decision" id="decision-10" style="display: none">
+        <h2 class="prompt">
+          You did it! You survived the <del>2008</del> 2023 financial crisis.
+          How do you feel?
+        </h2>
+        <button class="decision_button">
+          Good, I shorted the market and made a killing
+        </button>
+        <button class="decision_button">
+          Great, my money made me depressed so I'm glad it's gone
+        </button>
+        <button class="decision_button">
+          Horrible, I'm a trust fund baby with trust fund baby problems
+        </button>
       </div>
     </div>
   </body>
