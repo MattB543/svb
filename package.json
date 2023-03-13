@@ -17,7 +17,7 @@
     "url": "https://github.com/MattB543/svb/issues"
   },
   "homepage": "https://github.com/MattB543/svb#readme",
-  "devDependencies": {
+  "dependencies": {
     "node-fetch": "^3.3.1"
   }
 }
