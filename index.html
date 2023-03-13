@@ -300,11 +300,18 @@
         if (response.status === 500) {
           return getResponse(answer_selected);
         }
-        loader.style.display = "none";
-        var decision_buttons = document.getElementsByClassName("decision");
-        for (var i = 0; i < decision_buttons.length; i++) {
-          decision_buttons[i].style.display = "block";
+
+        if (
+          !response ||
+          !response.choices ||
+          !response.choices[0] ||
+          !response.choices[0].message ||
+          !response.choices[0].message.content
+        ) {
+          return getResponse(answer_selected);
         }
+
+        loader.style.display = "none";
         const responseOutput = document.getElementById("response-output");
         responseOutput.innerHTML = response.choices[0].message.content;
         currentSlide += 1;
@@ -312,7 +319,6 @@
 
       function showNextSlide(answer_number) {
         getResponse(answer_number).then(() => {
-          console.log(currentSlide);
           showDecision(currentSlide);
         });
       }
