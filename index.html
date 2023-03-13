@@ -5,24 +5,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
-    <script>
-      // create showNextSlide function
-      function showNextSlide(slideNumber) {
-        showDecision(slideNumber);
-      }
-
-      // create showDecision function
-      function showDecision(decisionNumber) {
-        // hide all decisions
-        var decisions = document.getElementsByClassName("decision");
-        for (var i = 0; i < decisions.length; i++) {
-          decisions[i].style.display = "none";
-        }
-        // show the decision with the given number
-        document.getElementById("decision-" + decisionNumber).style.display =
-          "flex";
-      }
-    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -30,23 +12,21 @@
       rel="stylesheet"
     />
   </head>
-  <body
-    onload="updateDashboard(); showDecision(1);"
-    class="max-w-4xl m-auto p-10 text-center"
-  >
+  <body onload="showDecision(1);" class="max-w-4xl m-auto p-10 text-center">
     <h1 class="text-4xl font-semibold mb-10">
-      Silicon Valley Bank<br />Rate Expectations
+      Silicon Valley Bank
+      <div class="cursive">Rate Expectations</div>
     </h1>
     <div id="decisions">
+      <div id="loader"></div>
+      <div id="response-output"></div>
+
       <div class="decision" id="decision-1" style="display: flex">
         <h2 class="prompt">
           You did it! You've landed the job as an SVB executive. Do you:
         </h2>
-        <button class="decision_button" onclick="showNextSlide(2);">
+        <button class="decision_button" onclick="showNextSlide(1);">
           Accept it and hope for a golden parachute
-        </button>
-        <button class="decision_button" onclick="showNextSlide(2);">
-          Decline it and join a crypto startup instead
         </button>
         <button class="decision_button" onclick="showNextSlide(2);">
           Accept it but secretly work for Thiel
@@ -57,11 +37,11 @@
         <h2 class="prompt">
           Time to impress the VCs! Which of these strategies do you choose:
         </h2>
-        <button class="decision_button" onclick="showNextSlide(3);">
+        <button class="decision_button" onclick="showNextSlide(1);">
           Give them tickets to the Warriors game and hope they don't notice
           Steph Curry is missing
         </button>
-        <button class="decision_button" onclick="showNextSlide(3);">
+        <button class="decision_button" onclick="showNextSlide(2);">
           Give them tickets to Burning Man and hope they don't get lost in the
           desert
         </button>
@@ -75,14 +55,14 @@
           You're in charge of deciding which startups get loans. What's your
           move?
         </h2>
-        <button class="decision_button" onclick="showNextSlide(4);">
+        <button class="decision_button" onclick="showNextSlide(1);">
           Give loans to the crypto startup and get paid in NFTs
         </button>
-        <button class="decision_button" onclick="showNextSlide(4);">
+        <button class="decision_button" onclick="showNextSlide(2);">
           Give loans to the biotech company and get access to their experimental
           drugs
         </button>
-        <button class="decision_button" onclick="showNextSlide(4);">
+        <button class="decision_button" onclick="showNextSlide(3);">
           Give loans to the social media app and get featured as an influencer
         </button>
       </div>
@@ -91,13 +71,13 @@
         <h2 class="prompt">
           It's time to create your portfolio. What's your strategy?
         </h2>
-        <button class="decision_button" onclick="showNextSlide(5);">
+        <button class="decision_button" onclick="showNextSlide(1);">
           Buy long-term bonds and hope inflation doesn't kill you
         </button>
-        <button class="decision_button" onclick="showNextSlide(5);">
+        <button class="decision_button" onclick="showNextSlide(2);">
           Buy short-term bonds and hope interest rates don't spike
         </button>
-        <button class="decision_button" onclick="showNextSlide(5);">
+        <button class="decision_button" onclick="showNextSlide(3);">
           Buy no bonds and invest in Dogecoin instead
         </button>
       </div>
@@ -106,13 +86,13 @@
         <h2 class="prompt">
           How will you respond to rising inflation and interest rates?
         </h2>
-        <button class="decision_button" onclick="showNextSlide(6);">
+        <button class="decision_button" onclick="showNextSlide(1);">
           Adjust your strategy by raising fees on your customers
         </button>
-        <button class="decision_button" onclick="showNextSlide(6);">
+        <button class="decision_button" onclick="showNextSlide(2);">
           Ignore the news by deleting Twitter from your phone
         </button>
-        <button class="decision_button" onclick="showNextSlide(6);">
+        <button class="decision_button" onclick="showNextSlide(3);">
           Blame your strategy on someone else by firing your CFO
         </button>
       </div>
@@ -121,42 +101,41 @@
         <h2 class="prompt">
           Rumors of financial troubles are circulating. What do you do?
         </h2>
-        <button class="decision_button" onclick="showNextSlide(7);">
+        <button class="decision_button" onclick="showNextSlide(1);">
           Deny them by issuing a press release full of buzzwords
         </button>
-        <button class="decision_button" onclick="showNextSlide(7);">
+        <button class="decision_button" onclick="showNextSlide(2);">
           Admit them by going on CNBC and crying
         </button>
-        <button class="decision_button" onclick="showNextSlide(7);">
+        <button class="decision_button" onclick="showNextSlide(3);">
           Sell the news to Thiel by becoming his mole inside SVB
         </button>
       </div>
 
       <div class="decision" id="decision-7" style="display: none">
         <h2 class="prompt">
-          The bank is in trouble. Will you seek a buyer or try to save it
-          yourself?
+          SBV is in trouble. Will you seek a buyer or try to save it yourself?
         </h2>
-        <button class="decision_button" onclick="showNextSlide(8);">
+        <button class="decision_button" onclick="showNextSlide(1);">
           Seek a buyer for SVB by pitching it as an opportunity for growth
         </button>
-        <button class="decision_button" onclick="showNextSlide(8);">
+        <button class="decision_button" onclick="showNextSlide(2);">
           Try to save SVB yourself by applying for a PPP loan
         </button>
-        <button class="decision_button" onclick="showNextSlide(8);">
+        <button class="decision_button" onclick="showNextSlide(3);">
           Do neither and wait for Elon Musk's tweet
         </button>
       </div>
 
       <div class="decision" id="decision-8" style="display: none">
         <h2 class="prompt">The regulators are coming. What's your approach?</h2>
-        <button class="decision_button" onclick="showNextSlide(9);">
+        <button class="decision_button" onclick="showNextSlide(1);">
           Cooperate with regulators by giving them access to all your records
         </button>
-        <button class="decision_button" onclick="showNextSlide(9);">
+        <button class="decision_button" onclick="showNextSlide(2);">
           Resist regulators by hiding evidence in offshore accounts
         </button>
-        <button class="decision_button" onclick="showNextSlide(9);">
+        <button class="decision_button" onclick="showNextSlide(3);">
           Seduce regulators by inviting them over for Netflix and chill
         </button>
       </div>
@@ -165,13 +144,13 @@
         <h2 class="prompt">
           How do you plan to protect your personal assets and reputation?
         </h2>
-        <button class="decision_button" onclick="showNextSlide(10);">
+        <button class="decision_button" onclick="showNextSlide(1);">
           Cash out by selling all your shares before they tank
         </button>
-        <button class="decision_button" onclick="showNextSlide(10);">
+        <button class="decision_button" onclick="showNextSlide(2);">
           Stay loyal by buying more shares at bargain prices
         </button>
-        <button class="decision_button" onclick="showNextSlide(10);">
+        <button class="decision_button" onclick="showNextSlide(3);">
           Flee the country by booking a flight on SpaceX
         </button>
       </div>
@@ -191,5 +170,161 @@
         </button>
       </div>
     </div>
+    <script>
+      let currentSlide = 1;
+      async function getResponse(answer_selected) {
+        var decisions = [
+          {
+            id: 1,
+            question:
+              "You did it! You've landed the job as an SVB executive. Do you:",
+            options: [
+              "Accept it and hope for a golden parachute",
+              "Accept it but secretly work for Thiel",
+            ],
+          },
+          {
+            id: 2,
+            question:
+              "Time to impress the VCs! Which of these strategies do you choose:",
+            options: [
+              "Give them tickets to the Warriors game and hope they don't notice Steph Curry is missing",
+              "Give them tickets to burning man and hope they don't get lost in the desert",
+              "Invite them to your house for dinner and serve them Beyond Meat",
+            ],
+          },
+          {
+            id: 3,
+            question:
+              "You're in charge of deciding which startups get loans. What's your move?",
+            options: [
+              "Give loans to the crypto startup and get paid in NFTs",
+              "Give loans to the biotech company and get access to their experimental drugs",
+              "Give loans to the social media app and get featured as an influencer",
+            ],
+          },
+          {
+            id: 4,
+            question:
+              "It's time to create your portfolio. What's your strategy?",
+            options: [
+              "Buy long-term bonds and hope inflation doesn't kill you",
+              "Buy short-term bonds and hope interest rates don't spike",
+              "Buy no bonds and invest in Dogecoin instead",
+            ],
+          },
+          {
+            id: 5,
+            question:
+              "How will you respond to rising inflation and interest rates?",
+            options: [
+              "Adjust your strategy by raising fees on your customers",
+              "Ignore the news by deleting Twitter from your phone",
+              "Blame your strategy on someone else by firing your CFO",
+            ],
+          },
+          {
+            id: 6,
+            question:
+              "Rumors of financial troubles are circulating. What do you do?",
+            options: [
+              "Deny them by issuing a press release full of buzzwords ",
+              "Admit them by going on CNBC and crying ",
+              "Sell the news to Thiel by becoming his mole inside SVB ",
+            ],
+          },
+          {
+            "id ": 7,
+            "question ":
+              "SBV is in trouble. Will you seek a buyer or try to save it yourself?",
+            options: [
+              "Seek a buyer for SVB by pitching it as an opportunity for growth",
+              "Try to save SVB yourself by applying for a PPP loan ",
+              "Do neither and wait for Elon Musk's tweet",
+            ],
+          },
+          {
+            "id ": 8,
+            "question ": "The regulators are coming. What's your approach?",
+            options: [
+              "Cooperate with regulators by giving them access to all your records ",
+              "Resist regulators by hiding evidence in offshore accounts ",
+              "Seduce regulators by inviting them over for Netflix and chill ",
+            ],
+          },
+          {
+            "id ": 9,
+            "question ":
+              "It's time to protect your personal assets and reputation. What's your plan?",
+            options: [
+              "Cash out by selling all your shares before they tank ",
+              "Stay loyal by buying more shares at bargain prices ",
+              "Flee the country by booking a flight on SpaceX",
+            ],
+          },
+        ];
+        const loader = document.getElementById("loader");
+        loader.style.display = "block";
+        var decision_buttons = document.getElementsByClassName("decision");
+        for (var i = 0; i < decision_buttons.length; i++) {
+          decision_buttons[i].style.display = "none";
+        }
+        document.getElementById("response-output").innerHTML = "";
+        const current_prompt = decisions[currentSlide - 1]["question"];
+        const next_prompt = decisions[currentSlide]["question"];
+        const selected_answer =
+          decisions[currentSlide - 1]["options"][answer_selected - 1];
+
+        const messages = [
+          {
+            role: "system",
+            content: "You are a helpful and funny game master.",
+          },
+          {
+            role: "user",
+            content:
+              "I'm playing a choose your own adventure game. I'm playing as the executive to the Silicon Valley Bank that will eventually, through the course of the game, collapse. You're playing the game master guiding me from one prompt to the next with a transition that contain startup/banking/tech jokes as well as story elements that transition from the previous prompt to the next prompt referencing the player's choice. Ready?",
+          },
+          { role: "assistant", content: "Ready!" },
+          {
+            role: "user",
+            content: `The previous prompt was: "${current_prompt}"\n\nI chose: "${selected_answer}"\n\nNow write a transition that will take me from the previous prompt to the next prompt while referencing my choice.\nThe next prompt is: "${next_prompt}"\nDo not repeat the next prompt word for word or reference the player in a meta way. Be a good game master and simply write a funny transition!`,
+          },
+        ];
+
+        const response = await fetch("/.netlify/functions/chat_gpt", {
+          method: "POST",
+          body: JSON.stringify({ messages }),
+        }).then((r) => r.json());
+
+        if (response.status === 500) {
+          return getResponse(answer_selected);
+        }
+        loader.style.display = "none";
+        var decision_buttons = document.getElementsByClassName("decision");
+        for (var i = 0; i < decision_buttons.length; i++) {
+          decision_buttons[i].style.display = "block";
+        }
+        const responseOutput = document.getElementById("response-output");
+        responseOutput.innerHTML = response.choices[0].message.content;
+        currentSlide += 1;
+      }
+
+      function showNextSlide(answer_number) {
+        getResponse(answer_number).then(() => {
+          console.log(currentSlide);
+          showDecision(currentSlide);
+        });
+      }
+
+      function showDecision(decisionNumber) {
+        var decisions = document.getElementsByClassName("decision");
+        for (var i = 0; i < decisions.length; i++) {
+          decisions[i].style.display = "none";
+        }
+        document.getElementById("decision-" + decisionNumber).style.display =
+          "flex";
+      }
+    </script>
   </body>
 </html>

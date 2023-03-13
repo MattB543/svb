@@ -1,0 +1,23 @@
+{
+  "name": "svb-game",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MattB543/svb.git"
+  },
+  "author": "Matt Brooks",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MattB543/svb/issues"
+  },
+  "homepage": "https://github.com/MattB543/svb#readme",
+  "devDependencies": {
+    "node-fetch": "^3.3.1"
+  }
+}
