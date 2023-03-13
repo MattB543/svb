@@ -11,6 +11,27 @@
   animation: spin 1s linear infinite;
   display: none; /* hide by default */
   margin: auto;
+  margin-top: 30px;
+}
+
+.explainer {
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.footer {
+  margin-top: auto;
+  color: black;
+  text-align: center;
+  font-size: 12px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.footer a {
+  color: black;
+  text-decoration: underline;
 }
 
 @keyframes spin {
@@ -20,11 +41,6 @@
   100% {
     transform: rotate(360deg);
   }
-}
-
-#response-output {
-  margin: auto;
-  margin-bottom: 20px;
 }
 
 .decision {
@@ -39,9 +55,9 @@
 }
 
 .prompt {
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 18px;
   margin-bottom: 20px;
+  text-align: left;
 }
 
 .decision_button {
