@@ -14,7 +14,6 @@
     <!-- Matomo -->
     <script>
       var _paq = (window._paq = window._paq || []);
-      /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
       _paq.push(["trackPageView"]);
       _paq.push(["enableLinkTracking"]);
       (function () {
@@ -29,9 +28,8 @@
         s.parentNode.insertBefore(g, s);
       })();
     </script>
-    <!-- End Matomo Code -->
   </head>
-  <body onload="showDecision(1);">
+  <body>
     <div class="max-w-4xl m-auto px-10 pt-10 text-center h-full flex flex-col">
       <h1 class="text-4xl font-semibold mb-4">
         Sand Vale Bank
@@ -64,131 +62,65 @@
     <script>
       let currentSlide = 1;
       let attempts = 0;
-      var decisions = [
-        {
-          id: 1,
-          question:
-            "You’re mingling with the elite of Silicon Valley at a lavish rooftop dinner party in San Francisco. The skyline is glittering and the bubbly is popping. You spot some familiar faces: Elon Musk, Mark Zuckerberg, Tim Cook. You also see some newcomers: the founders of Clubhouse, Substack, and NFTify. Everyone wants to talk to you because you’re the SVB executive who can make their dreams come true.",
-          options: [
-            "Schmooze with Elon Musk and pitch him your idea for a Mars colony bank",
-            "Chat with Mark Zuckerberg and ask him to invest in your metaverse fund",
-            "Flirt with Tim Cook and try to get a sneak peek of the next iPhone",
-          ],
-        },
-        {
-          id: 2,
-          question:
-            "A hot new startup called MetaVerse has just raised a whopping $100 million Series A from Andreessen Horowitz and Sequoia Capital. They’re building a virtual reality platform that lets users create and explore immersive digital worlds. They’re looking for more money to scale up their operations and hire more engineers. They’ve heard that SVB offers venture debt with favorable terms and no strings attached.",
-          options: [
-            "Offer MetaVerse a $50 million loan at 0% interest and a 10% equity stake",
-            "Tell MetaVerse to wait until you do your due diligence and check their VR headset for yourself",
-            "Reject MetaVerse’s request and tell them that VR is a fad and AR is the future",
-          ],
-        },
-        {
-          id: 3,
-          question:
-            "You’re sitting across from the CEO of a promising startup called RoboTaxi. They’re developing self-driving cars that can be summoned via an app. They have a working prototype and impressive traction in several markets. They’re eager to secure funding from SVB because they know you have connections with top VCs and tech giants who could acquire them in the future.",
-          options: [
-            "Agree to fund RoboTaxi with a $100 million loan at 5% interest and no covenants",
-            "Negotiate with RoboTaxi to lower their valuation and give you more equity and board seats",
-            "Pass on RoboTaxi and tell them that self-driving cars are too risky and regulated",
-          ],
-        },
-        {
-          id: 4,
-          question:
-            "SVB has amassed a staggering $190 billion in deposits thanks to its successful business development efforts. The bank has been offering sweetheart deals to startups, VCs, and tech executives who agree to bank with SVB exclusively. The bank is looking for ways to invest the money and generate returns without taking too much risk. The bank’s chief investment officer suggests buying billions of dollars of long-dated mortgage-backed securities paying ~1.6% interest.",
-          options: [
-            "Follow the chief investment officer’s suggestion and buy billions of dollars of long-dated mortgage-backed securities paying ~1.6% interest",
-            "Ignore the chief investment officer’s suggestion and invest in more startups and tech stocks",
-            "Go rogue and buy billions of dollars of bitcoin, ethereum, and dogecoin",
-          ],
-        },
-        {
-          id: 5,
-          question:
-            "Your boss has assigned you with building relationships with key clients in the tech industry. You have a generous expense account and are encouraged to use it to win business. You can take clients out for fancy dinners, golf outings, spa treatments, or even private jet rides. You can also offer them perks like discounted mortgages backed by their company or fund equity.",
-          options: [
-            "Take your clients out for a Michelin-starred dinner at French Laundry followed by a night at the Ritz-Carlton",
-            "Invite your clients to join you for a round of golf at Pebble Beach followed by a massage at the spa",
-            "Surprise your clients with a private jet ride to Las Vegas followed by a VIP table at the Bellagio",
-          ],
-        },
-        {
-          id: 6,
-          question:
-            "A well-known VC firm called Y Combinator is seeking a loan from SVB to fund their latest investment round.They have a strong track record of backing successful startups like Airbnb, Dropbox, and Stripe.They are considered low-risk by the bank because they have access to plenty of capital from other sources.They want to borrow $500 million from SVB at a low interest rate and with minimal oversight.",
-          options: [
-            "Lend Y Combinator $500 million at 2% interest and with minimal oversight",
-            "Lend Y Combinator $250 million at 4% interest and with regular reporting requirements",
-            "Lend Y Combinator $100 million at 8% interest and with veto power over their investments",
-          ],
-        },
-        {
-          id: 7,
-          question:
-            "The Fed announces changes to its policies that will impact interest rates and deposit growth at banks like SVB.The Fed says it will raise its benchmark rate by 0.25% every quarter for the next two years.The Fed also says it will stop buying mortgage-backed securities by the end of the year.These moves are intended to curb inflation and cool down the overheated economy.There’s uncertainty about how this will affect SVB’s balance sheet which relies heavily on deposits and long-dated assets.",
-          options: [
-            "Stay calm and trust that SVB’s balance sheet is strong enough to withstand the Fed’s changes",
-            "Panic and sell some of SVB’s long-dated assets before they lose more value",
-            "Hedge your bets and buy some gold and bonds as a safety net",
-          ],
-        },
-        {
-          id: 8,
-          question:
-            "SVB’s balance sheet is starting to look shaky as deposit growth slows down and long-dated assets lose value.Startups begin burning cash faster as interest rates rise making it harder for them to raise money again.Some startups default on their loans or go bankrupt.Some VCs pull out their funds from SVB or demand higher interest rates.SVB’s long-dated mortgage-backed securities drop in value as interest rates rise.SVB tries to raise debt + equity but this only causes more confusion and desperation among depositors.The bank needs to take action quickly to shore up its finances before it’s too late.",
-          options: [
-            "Raise debt + equity from other banks or investors to shore up SVB’s finances",
-            "Cut costs by laying off employees or selling assets",
-            "Cook the books by hiding losses inflating revenues",
-          ],
-        },
-        {
-          id: 9,
-          question:
-            "Depositors start withdrawing their funds in large numbers as rumors about SVB’s financial troubles spread on social media.A viral tweet claims that SVB is insolvent and advises people to get their money out ASAP.A popular podcast host says that SVB is involved in fraud and mismanagement.A whistleblower leaks internal documents that show SVB’s balance sheet is riddled with bad loans and toxic assets.The bank is facing a sudden bank run and needs to take action quickly to stop the bleeding before it runs out of cash.",
-          options: [
-            "Cash out by selling all your shares before they tank ",
-            "Stay loyal by buying more shares at bargain prices ",
-            "Flee the country by booking a flight on SpaceX",
-          ],
-        },
-        {
-          id: 10,
-          question:
-            "SVB enters receivership as valuations for long-dated cashflows decrease rapidly.The FDIC takes custody of all assets and announces that it will liquidate them at fire-sale prices.The future of the bank is uncertain.Some analysts predict that another bank will buy SVB’s assets and resume its operations.Others say that no one will touch SVB’s assets with a ten-foot pole.SVB’s employees, clients, and investors are left in limbo wondering what will happen next.",
-          options: [
-            "Hope that another bank will buy SVB’s assets and resume its operations",
-            "Sue the FDIC for taking over SVB’s assets and violating your rights",
-            "Accept the fate of SVB and look for a new job in the tech industry",
-          ],
-        },
-      ];
-      var parentElement = document.getElementById("decisions");
 
-      for (var i = 0; i < decisions.length; i++) {
-        var decision = decisions[i];
-        var div = document.createElement("div");
-        div.classList.add("decision");
-        div.id = "decision-" + decision.id;
-        div.style.display = i === 0 ? "flex" : "none";
-        var h2 = document.createElement("h2");
-        h2.classList.add("prompt");
-        h2.innerText = decision.question;
-        div.appendChild(h2);
+      let decisions = [];
+      const xhr = new XMLHttpRequest();
+      xhr.open("GET", "prompts.tsv");
 
-        for (var j = 0; j < decision.options.length; j++) {
-          var option = decision.options[j];
-          var button = document.createElement("button");
-          button.classList.add("decision_button");
-          button.innerText = option;
-          button.setAttribute("onclick", "showNextSlide(" + (j + 1) + ")");
-          div.appendChild(button);
+      xhr.onload = function () {
+        if (xhr.status === 200) {
+          const tsvData = xhr.responseText;
+          const rows = tsvData.split("\n");
+          const headerRow = rows.shift().split("\t");
+          const objects = rows.map(function (row) {
+            const values = row.split("\t");
+            const object = {};
+
+            headerRow.forEach(function (header, index) {
+              object[header.trim()] = values[index].trim();
+            });
+            return object;
+          });
+          objects.forEach(function (object) {
+            object.options = [
+              object["option 1"],
+              object["option 2"],
+              object["option 3"],
+            ];
+            delete object["option 1"];
+            delete object["option 2"];
+            delete object["option 3"];
+          });
+          decisions = objects;
+
+          for (var i = 0; i < decisions.length; i++) {
+            var decision = decisions[i];
+            var div = document.createElement("div");
+            div.classList.add("decision");
+            div.id = "decision-" + decision.id;
+            div.style.display = i === 0 ? "flex" : "none";
+            var h2 = document.createElement("h2");
+            h2.classList.add("prompt");
+            h2.innerText = decision.question;
+            div.appendChild(h2);
+
+            for (var j = 0; j < decision.options.length; j++) {
+              var option = decision.options[j];
+              var button = document.createElement("button");
+              button.classList.add("decision_button");
+              button.innerText = option;
+              button.setAttribute("onclick", "showNextSlide(" + (j + 1) + ")");
+              div.appendChild(button);
+            }
+            parentElement.appendChild(div);
+          }
+          showDecision(1);
         }
-        parentElement.appendChild(div);
-      }
+      };
+
+      xhr.send();
+
+      var parentElement = document.getElementById("decisions");
 
       async function getResponse(answer_selected) {
         const loader = document.getElementById("loader");
