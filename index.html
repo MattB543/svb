@@ -288,13 +288,13 @@
           );
           var button = document.createElement("button");
           button.classList.add("decision_button");
-          // replace Choice 1: with nothing
           choice_response = response_2.choices[0].message.content
             .replace("Choice 1:", "")
             .replace("Choice:", "")
             .replace("Option 1:", "")
-            .replace("Option:", "");
-          button.innerText = response_2.choices[0].message.content;
+            .replace("Option:", "")
+            .replace(`"`, "");
+          button.innerText = choice_response;
           button.setAttribute("onclick", "showNextSlide(" + (j + 1) + ")");
           decision.appendChild(button);
         }
