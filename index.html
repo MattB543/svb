@@ -246,7 +246,7 @@
           { role: "assistant", content: "Ready!" },
           {
             role: "user",
-            content: `The prompt is: "${next_prompt}"\n\nCreate a comedic choice that will progress me through the story. The choice should be exaggerated, pithy, ironic, sarcastic or absurd, but definitely funny. The option should play on the tropes of investment, banking, startups, silicon valley, crypto, tech, or greed. Reply only with the choice and nothing else.\n\nChoice:`,
+            content: `The prompt is: "${next_prompt}"\n\nCreate a comedic choice (between 5 - 20 words long) that will progress me through the story. The choice should be exaggerated, pithy, ironic, sarcastic or absurd, but definitely funny. The option should play on the tropes of investment, banking, startups, silicon valley, crypto, tech, or greed. Reply only with the choice and nothing else.\n\nChoice:`,
           },
         ];
 
@@ -288,6 +288,12 @@
           );
           var button = document.createElement("button");
           button.classList.add("decision_button");
+          // replace Choice 1: with nothing
+          choice_response = response_2.choices[0].message.content
+            .replace("Choice 1:", "")
+            .replace("Choice:", "")
+            .replace("Option 1:", "")
+            .replace("Option:", "");
           button.innerText = response_2.choices[0].message.content;
           button.setAttribute("onclick", "showNextSlide(" + (j + 1) + ")");
           decision.appendChild(button);
