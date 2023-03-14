@@ -102,7 +102,7 @@
           options: [
             "Follow the chief investment officer’s suggestion and buy billions of dollars of long-dated mortgage-backed securities paying ~1.6% interest",
             "Ignore the chief investment officer’s suggestion and invest in more startups and tech stocks",
-            "Go rogue and buy billions of dollars of bitcoin ethereum",
+            "Go rogue and buy billions of dollars of bitcoin, ethereum, and dogecoin",
           ],
         },
         {
@@ -241,12 +241,12 @@
           {
             role: "user",
             content:
-              "I'm playing a choose your own adventure game. I'm playing as the executive to the Sand Vale Bank that will eventually, through the course of the game, collapse. You're playing the game master Creating choices for me to follow through the story. Ready?",
+              "I'm playing a choose your own adventure game. I'm playing as the executive to the Sand Vale Bank that will eventually, through the course of the game, collapse. You're playing the game master creating choices for me to follow through the story. Ready?",
           },
           { role: "assistant", content: "Ready!" },
           {
             role: "user",
-            content: `The prompt is: "${next_prompt}"\n\nCreate a comedic choice for me to follow through the story. The choice should be exaggerated, pithy, ironic, sarcastic or absurd, but definitely funny. The option should play on the tropes of investment, banking, startups, silicon valley, crypto, tech, or greed. Reply only with the choice and nothing else.\n\nChoice:`,
+            content: `The prompt is: "${next_prompt}"\n\nCreate a comedic choice that will progress me through the story. The choice should be exaggerated, pithy, ironic, sarcastic or absurd, but definitely funny. The option should play on the tropes of investment, banking, startups, silicon valley, crypto, tech, or greed. Reply only with the choice and nothing else.\n\nChoice:`,
           },
         ];
 
@@ -274,7 +274,6 @@
           );
           let h2 = decision.getElementsByTagName("h2")[0];
           h2.innerText = response.choices[0].message.content;
-          currentSlide += 1;
         }
 
         if (
@@ -293,6 +292,7 @@
           button.setAttribute("onclick", "showNextSlide(" + (j + 1) + ")");
           decision.appendChild(button);
         }
+        currentSlide += 1;
       }
 
       function showNextSlide(answer_number) {
