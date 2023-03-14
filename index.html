@@ -288,7 +288,7 @@
           );
           var button = document.createElement("button");
           button.classList.add("decision_button");
-          button.innerText = option;
+          button.innerText = response_2.choices[0].message.content;
           button.setAttribute("onclick", "showNextSlide(" + (j + 1) + ")");
           decision.appendChild(button);
         }
