@@ -165,7 +165,7 @@
               var button = document.createElement("button");
               button.classList.add("decision_button");
               button.innerText = option;
-              button.setAttribute("onclick", `showNextSlide(${option})`);
+              button.setAttribute("onclick", `showNextSlide("${option}")`);
               div.appendChild(button);
             }
             parentElement.appendChild(div);
@@ -217,7 +217,7 @@
           .catch((e) => {
             attempts += 1;
             if (attempts <= 1) {
-              return getResponse(answer_selected);
+              return getResponse(selected_answer);
             } else {
               loader.style.display = "none";
               gif.style.display = "none";
@@ -290,7 +290,7 @@
             .replace("Option:", "")
             .replaceAll(`"`, "");
           button.innerText = choice_response;
-          button.setAttribute("onclick", `showNextSlide(${choice_response})`);
+          button.setAttribute("onclick", `showNextSlide("${choice_response}")`);
           decision.appendChild(button);
         }
         currentSlide += 1;
