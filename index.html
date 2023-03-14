@@ -233,6 +233,8 @@
             }
           });
 
+        const answer_array = decisions[currentSlide - 1]["options"];
+
         messages = [
           {
             role: "system",
@@ -246,7 +248,7 @@
           { role: "assistant", content: "Ready!" },
           {
             role: "user",
-            content: `The prompt is: "${next_prompt}"\n\nCreate a comedic choice (between 5 - 20 words long) that will progress me through the story. The choice should be exaggerated, pithy, ironic, sarcastic or absurd, but definitely funny. The option should play on the tropes of investment, banking, startups, silicon valley, crypto, tech, or greed. Reply only with the choice and nothing else.\n\nChoice:`,
+            content: `The prompt is: "${next_prompt}"\n\nCreate a fourth comedic choice (between 5 - 20 words long) that will progress me through the story. The choice should be exaggerated, pithy, ironic, sarcastic or absurd, but definitely funny. The option should play on the tropes of investment, banking, startups, silicon valley, tech, or greed. The other 3 choices for this prompt are: ${answer_array}\nReply only with the fourth new choice and nothing else.\n\nOption 4:`,
           },
         ];
 
@@ -293,7 +295,7 @@
             .replace("Choice:", "")
             .replace("Option 1:", "")
             .replace("Option:", "")
-            .replace(`"`, "");
+            .replaceAll(`"`, "");
           button.innerText = choice_response;
           button.setAttribute("onclick", "showNextSlide(" + (j + 1) + ")");
           decision.appendChild(button);
