@@ -202,7 +202,7 @@
         const selected_answer =
           decisions[currentSlide - 1]["options"][answer_selected - 1];
 
-        const messages = [
+        let messages = [
           {
             role: "system",
             content: "You are a helpful and funny game master.",
@@ -233,6 +233,32 @@
             }
           });
 
+        messages = [
+          {
+            role: "system",
+            content: "You are a helpful and funny game master.",
+          },
+          {
+            role: "user",
+            content:
+              "I'm playing a choose your own adventure game. I'm playing as the executive to the Sand Vale Bank that will eventually, through the course of the game, collapse. You're playing the game master Creating choices for me to follow through the story. Ready?",
+          },
+          { role: "assistant", content: "Ready!" },
+          {
+            role: "user",
+            content: `The prompt is: "${next_prompt}"\n\nCreate a comedic choice for me to follow through the story. The choice should be exaggerated, pithy, ironic, sarcastic or absurd, but definitely funny. The option should play on the tropes of investment, banking, startups, silicon valley, crypto, tech, or greed. Reply only with the choice and nothing else.\n\nChoice:`,
+          },
+        ];
+
+        const response_2 = await fetch("/.netlify/functions/chat_gpt", {
+          method: "POST",
+          body: JSON.stringify({ messages }),
+        })
+          .then((r) => r.json())
+          .catch((e) => {
+            console.log(e);
+          });
+
         if (
           !response ||
           !response.choices ||
@@ -246,10 +272,26 @@
           let decision = document.getElementById(
             "decision-" + (currentSlide + 1)
           );
-          console.log(decision);
           let h2 = decision.getElementsByTagName("h2")[0];
           h2.innerText = response.choices[0].message.content;
           currentSlide += 1;
+        }
+
+        if (
+          response_2 ||
+          response_2.choices ||
+          response_2.choices[0] ||
+          response_2.choices[0].message ||
+          response_2.choices[0].message.content
+        ) {
+          let decision = document.getElementById(
+            "decision-" + (currentSlide + 1)
+          );
+          var button = document.createElement("button");
+          button.classList.add("decision_button");
+          button.innerText = option;
+          button.setAttribute("onclick", "showNextSlide(" + (j + 1) + ")");
+          decision.appendChild(button);
         }
       }
 
