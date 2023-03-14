@@ -3,12 +3,8 @@
 }
 
 #loader {
-  border: 2px solid #f3f3f3; /* gray border */
-  border-top: 2px solid #3498db; /* blue border */
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  animation: spin 1s linear infinite;
+  width: 300px;
+  height: auto;
   display: none; /* hide by default */
   margin: auto;
   margin-top: 30px;
@@ -32,15 +28,6 @@
 .footer a {
   color: black;
   text-decoration: underline;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
 }
 
 .decision {

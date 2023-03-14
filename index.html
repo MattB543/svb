@@ -42,7 +42,63 @@
         >
       </div>
       <div id="decisions">
-        <div id="loader"></div>
+        <div id="loader">
+          Consulting the AI...
+          <img
+            class="loading_gif"
+            style="display: none"
+            id="loader_1"
+            src="https://res.cloudinary.com/incognito-apps-inc/image/upload/v1678807612/loading/giphy_l3ttrg.gif"
+          />
+          <img
+            class="loading_gif"
+            style="display: none"
+            id="loader_2"
+            src="https://res.cloudinary.com/incognito-apps-inc/image/upload/v1678807612/loading/giphy_l3ttrg.gif"
+          />
+          <img
+            class="loading_gif"
+            style="display: none"
+            id="loader_3"
+            src="https://res.cloudinary.com/incognito-apps-inc/image/upload/v1678807612/loading/giphy_l3ttrg.gif"
+          />
+          <img
+            class="loading_gif"
+            style="display: none"
+            id="loader_4"
+            src="https://res.cloudinary.com/incognito-apps-inc/image/upload/v1678807612/loading/giphy_l3ttrg.gif"
+          />
+          <img
+            class="loading_gif"
+            style="display: none"
+            id="loader_5"
+            src="https://res.cloudinary.com/incognito-apps-inc/image/upload/v1678807612/loading/giphy_l3ttrg.gif"
+          />
+          <img
+            class="loading_gif"
+            style="display: none"
+            id="loader_6"
+            src="https://res.cloudinary.com/incognito-apps-inc/image/upload/v1678807612/loading/giphy_l3ttrg.gif"
+          />
+          <img
+            class="loading_gif"
+            style="display: none"
+            id="loader_7"
+            src="https://res.cloudinary.com/incognito-apps-inc/image/upload/v1678807612/loading/giphy_l3ttrg.gif"
+          />
+          <img
+            class="loading_gif"
+            style="display: none"
+            id="loader_8"
+            src="https://res.cloudinary.com/incognito-apps-inc/image/upload/v1678807612/loading/giphy_l3ttrg.gif"
+          />
+          <img
+            class="loading_gif"
+            style="display: none"
+            id="loader_9"
+            src="https://res.cloudinary.com/incognito-apps-inc/image/upload/v1678807612/loading/giphy_l3ttrg.gif"
+          />
+        </div>
       </div>
       <div class="footer">
         Find me on
@@ -124,7 +180,10 @@
 
       async function getResponse(answer_selected) {
         const loader = document.getElementById("loader");
+        const loading_gifs = document.getElementsByClassName("loading_gif");
         loader.style.display = "block";
+        const gif = document.getElementById(`loader_${currentSlide}`);
+        gif.style.display = "block";
         var decision_buttons = document.getElementsByClassName("decision");
         for (var i = 0; i < decision_buttons.length; i++) {
           decision_buttons[i].style.display = "none";
@@ -162,6 +221,7 @@
               return getResponse(answer_selected);
             } else {
               loader.style.display = "none";
+              gif.style.display = "none";
             }
           });
 
@@ -201,8 +261,10 @@
           !response.choices[0].message.content
         ) {
           loader.style.display = "none";
+          gif.style.display = "none";
         } else {
           loader.style.display = "none";
+          gif.style.display = "none";
           let decision = document.getElementById(
             "decision-" + (currentSlide + 1)
           );
@@ -211,10 +273,10 @@
         }
 
         if (
-          response_2 ||
-          response_2.choices ||
-          response_2.choices[0] ||
-          response_2.choices[0].message ||
+          response_2 &&
+          response_2.choices &&
+          response_2.choices[0] &&
+          response_2.choices[0].message &&
           response_2.choices[0].message.content
         ) {
           let decision = document.getElementById(
