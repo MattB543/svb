@@ -165,7 +165,7 @@
               var button = document.createElement("button");
               button.classList.add("decision_button");
               button.innerText = option;
-              button.setAttribute("onclick", "showNextSlide(" + (j + 1) + ")");
+              button.setAttribute("onclick", `showNextSlide(${option})`);
               div.appendChild(button);
             }
             parentElement.appendChild(div);
@@ -178,7 +178,7 @@
 
       var parentElement = document.getElementById("decisions");
 
-      async function getResponse(answer_selected) {
+      async function getResponse(answer) {
         const loader = document.getElementById("loader");
         const loading_gifs = document.getElementsByClassName("loading_gif");
         loader.style.display = "block";
@@ -190,8 +190,7 @@
         }
         const current_prompt = decisions[currentSlide - 1]["question"];
         const next_prompt = decisions[currentSlide]["question"];
-        const selected_answer =
-          decisions[currentSlide - 1]["options"][answer_selected - 1];
+        const selected_answer = answer;
 
         let messages = [
           {
@@ -285,20 +284,20 @@
           var button = document.createElement("button");
           button.classList.add("decision_button");
           choice_response = response_2.choices[0].message.content
-            .replace("Choice 1:", "")
+            .replace("Choice 4:", "")
             .replace("Choice:", "")
-            .replace("Option 1:", "")
+            .replace("Option 4:", "")
             .replace("Option:", "")
             .replaceAll(`"`, "");
           button.innerText = choice_response;
-          button.setAttribute("onclick", "showNextSlide(" + (j + 1) + ")");
+          button.setAttribute("onclick", `showNextSlide(${choice_response})`);
           decision.appendChild(button);
         }
         currentSlide += 1;
       }
 
-      function showNextSlide(answer_number) {
-        getResponse(answer_number).then(() => {
+      function showNextSlide(answer) {
+        getResponse(answer).then(() => {
           showDecision(currentSlide);
         });
       }
